@@ -13,7 +13,7 @@ SimBEL est un modèle de simulation Monte-Carlo s'appuyant sur une projection d'
 ``` r
 dev_mode(on = TRUE)
 
-install_github("qguibert/SimBEL")
+install_github("Shiaroku/SimBEL")
 
 dev_mode(on = FALSE)
 
