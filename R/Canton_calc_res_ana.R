@@ -142,7 +142,7 @@ setMethod(
                     charges_prov = list(
                         prov_deb = pm_deb,
                         prov_fin = -(pm_fin),
-                        prov_div = -(prov_div),
+                        prov_div = -(prov_div) * rep(1 / length(pm_fin), length(pm_fin)), # en attendant mieux
                         revalo_ic_pb = revalo_ic_pb,
                         csg = -(csg)
                     ),
@@ -155,12 +155,12 @@ setMethod(
                 prod_fin = list(
                     revenu_placements = resultat_fin * alloc_pm_moy
                 ),
-                rep_dot_pre = -(var_pre),
+                rep_dot_pre = -(var_pre) * rep(1 / length(pm_fin), length(pm_fin)), # en attendant mieux
                 ic = -(ic),
                 pb = -(pb),
                 ppe_pbr = list(
                     rep = result_revalo[["pb_attrib"]][["pb_rep"]] * alloc_rep_ppb,
-                    dot = -(result_revalo[["pb_attrib"]][["pb_dot"]] * alloc_dot_ppb)
+                    dot <- -(result_revalo[["pb_attrib"]][["pb_dot"]] * alloc_dot_ppb)
                 )
             )
         )

@@ -112,7 +112,7 @@ setMethod(
         nom_flux <- c("nom_produit", "prime", "prestation", "prestation_fdb", "frais", "flux_be")
         # Nom de la liste qui permettent d'alimenter les tableaux de flux
         nom_be <- c("nom_produit", "prime_actu", "prestation_actu", "prestation_fdb_actu", "frais_actu", "be")
-        nom_result <- c("result_tech_actu", "result_fin_actu", "result_brut_actu", "result_net_actu")
+        nom_result <- c("result_tech_actu", "result_fin_actu", "result_brut_actu", "result_net_actu", "pvfp")
 
         # Initialisation des calculs de moyenne
         res_flux <- lapply(nom_flux[-1], function(x) {

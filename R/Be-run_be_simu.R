@@ -70,6 +70,7 @@ setMethod(
         result_fin <- prime
         result_brut <- prime
         result_net <- prime
+        res_ana <- prime
 
         # Canton en date initial
         canton <- x@canton
@@ -101,6 +102,12 @@ setMethod(
             result_fin[[an]] <- result_proj_an[["result_fin"]]
             result_brut[[an]] <- result_proj_an[["result_brut"]]
             result_net[[an]] <- result_proj_an[["result_net"]]
+            res_ana[[an]] <- rowSums(
+                matrix(
+                    unlist(result_proj_an[["cdr"]]),
+                    nrow = length(result_proj_an[["nom_produit"]]) - 1
+                )
+            )
 
             # Variables pour decomposition du BE
             prime[[an]] <- output_be[["prime"]]
@@ -153,6 +160,7 @@ setMethod(
         result_fin <- do.call("rbind", result_fin)
         result_brut <- do.call("rbind", result_brut)
         result_net <- do.call("rbind", result_net)
+        res_ana <- do.call("rbind", res_ana)
 
         # Suppression des noms parasites de colonnes de matrice
         colnames(prime) <- NULL
@@ -164,6 +172,7 @@ setMethod(
         colnames(result_fin) <- NULL
         colnames(result_brut) <- NULL
         colnames(result_net) <- NULL
+        colnames(res_ana) <- NULL
 
         # Noms des produits
         nom_produit <- result_proj_an[["nom_produit"]]
@@ -180,6 +189,7 @@ setMethod(
         result_fin_actu <- deflateur %*% result_fin
         result_brut_actu <- deflateur %*% result_brut
         result_net_actu <- deflateur %*% result_net
+        pvfp <- c(deflateur %*% res_ana, 0)
 
         # Aggregation des bases
         table_output_be <- merge_table_be(prime, frais, prestation, prestation_fdb, i, nom_produit)
@@ -222,7 +232,8 @@ setMethod(
                 result_tech_actu = result_tech_actu,
                 result_fin_actu = result_fin_actu,
                 result_brut_actu = result_brut_actu,
-                result_net_actu = result_net_actu
+                result_net_actu = result_net_actu,
+                pvfp = pvfp
             ),
             canton = canton
         ))

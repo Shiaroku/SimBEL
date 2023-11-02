@@ -52,7 +52,7 @@ setClass(
         # Nom de la liste qui permettent d'alimenter les tableaux de flux
         nom_be <- c("nom_produit", "prime_actu", "prestation_actu", "prestation_fdb_actu", "frais_actu", "be")
         # Nom de la liste qui permettent d'alimenter les tableaux de flux
-        nom_result <- c("result_tech_actu", "result_fin_actu", "result_brut_actu", "result_net_actu")
+        nom_result <- c("result_tech_actu", "result_fin_actu", "result_brut_actu", "result_net_actu", "pvfp")
 
         # Test sur la longueur des listes de resultats
         if (length(object@tab_flux) != length(nom_flux)) {
@@ -117,7 +117,8 @@ setMethod(
             )
             list_result <- list(
                 result_tech_actu = numeric(), result_fin_actu = numeric(),
-                result_brut_actu = numeric(), result_net_actu = numeric()
+                result_brut_actu = numeric(), result_net_actu = numeric(),
+                pvfp = numeric()
             )
 
             .Object@param_be <- new("ParamBe")
